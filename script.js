@@ -1,4 +1,7 @@
 const MAX_TIME = 60;
+const HUNDRED = 100;
+const MAX_VALUE = 1000;
+
 let TIME_LIMIT = MAX_TIME;
 
 let quotes_array = [
@@ -80,7 +83,7 @@ function processCurrentText() {
     error_text.textContent = total_correct + correct;
 
     let correctCharacters = (characterTyped - (total_correct + correct));
-    let accuracyVal = ((correctCharacters / characterTyped) * 100);
+    let accuracyVal = ((correctCharacters / characterTyped) * HUNDRED);
     accuracy_text.textContent = Math.round(accuracyVal);
 
     if (curr_input.length == current_quote.length) {
@@ -114,8 +117,8 @@ function finishGame() {
 
     restart_btn.style.display = "block";
 
-    cpm = Math.round(((characterTyped / timeElapsed) * 60));
-    wpm = Math.round((((characterTyped / 5) / timeElapsed) * 60));
+    cpm = Math.round(((characterTyped / timeElapsed) * MAX_TIME));
+    wpm = Math.round((((characterTyped / 5) / timeElapsed) * MAX_TIME));
 
     cpm_text.textContent = cpm;
     wpm_text.textContent = wpm;
@@ -131,7 +134,7 @@ function startGame() {
     updateQuote();
 
     clearInterval(timer);
-    timer = setInterval(updateTimer, 1000);
+    timer = setInterval(updateTimer, MAX_VALUE);
 }
 
 function resetValues() {
@@ -146,7 +149,7 @@ function resetValues() {
 
     input_area.value = "";
     quote_text.textContent = 'Click on the area below to start the game.';
-    accuracy_text.textContent = 100;
+    accuracy_text.textContent = HUNDRED;
     timer_text.textContent = timeLeft + 's';
     error_text.textContent = 0;
     restart_btn.style.display = "none";
