@@ -1,4 +1,5 @@
-let TIME_LIMIT = 60;
+const MAX_TIME = 60;
+let TIME_LIMIT = MAX_TIME;
 
 let quotes_array = [
     "Push yourself, because no one else is going to do it for you.",
@@ -112,6 +113,15 @@ function finishGame() {
     quote_text.textContent = "Click on restart to start a new game.";
 
     restart_btn.style.display = "block";
+
+    cpm = Math.round(((characterTyped / timeElapsed) * 60));
+    wpm = Math.round((((characterTyped / 5) / timeElapsed) * 60));
+
+    cpm_text.textContent = cpm;
+    wpm_text.textContent = wpm;
+
+    cpm_group.style.display = "block";
+    wpm_group.style.display = "block";
 }
 
 
