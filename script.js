@@ -1,8 +1,7 @@
-const MAX_TIME = 60;
 const HUNDRED = 100;
 const MAX_VALUE = 1000;
 
-let TIME_LIMIT = MAX_TIME;
+let TIME_LIMIT = 60;
 
 let quotes_array = [
     "Push yourself, because no one else is going to do it for you.",
@@ -41,29 +40,27 @@ function updateQuote() {
     current_quote = quotes_array[quoteNo];
 
     current_quote.split('').forEach(char => {
-        const charSpan = document.createElement('span')
-        charSpan.innerText = char
-        quote_text.appendChild(charSpan)
+        const charSpan = document.createElement('span');
+        charSpan.innerText = char;
+        quote_text.appendChild(charSpan);
     })
 
-    if (quoteNo < quotes_array.length - 1)
+    if (quoteNo < quotes_array.length - 1) {
         ++quoteNo;
-    else
+    } else {
         quoteNo = 0;
+    }
 }
 
 function processCurrentText() {
-
     curr_input = input_area.value;
     curr_input_array = curr_input.split('');
-
     ++characterTyped;
-
     correct = 0;
 
     quoteSpanArray = quote_text.querySelectorAll('span');
     quoteSpanArray.forEach((char, index) => {
-        let typedChar = curr_input_array[index]
+        let typedChar = curr_input_array[index];
 
         if (typedChar == null) {
             char.classList.remove('correct_char');
@@ -88,9 +85,7 @@ function processCurrentText() {
 
     if (curr_input.length == current_quote.length) {
         updateQuote();
-
         total_correct += correct;
-
         input_area.value = "";
     }
 }
@@ -98,41 +93,30 @@ function processCurrentText() {
 function updateTimer() {
     if (timeLeft > 0) {
         --timeLeft;
-
         ++timeElapsed;
-
         timer_text.textContent = timeLeft + "s";
-    }
-    else {
+    } else {
         finishGame();
     }
 }
 
 function finishGame() {
     clearInterval(timer);
-
     input_area.disabled = true;
-
     quote_text.textContent = "Click on restart to start a new game.";
-
     restart_btn.style.display = "block";
-
-    cpm = Math.round(((characterTyped / timeElapsed) * MAX_TIME));
-    wpm = Math.round((((characterTyped / 5) / timeElapsed) * MAX_TIME));
-
+    cpm = Math.round(((characterTyped / timeElapsed) * TIME_LIMIT));
+    wpm = Math.round((((characterTyped / 5) / timeElapsed) * TIME_LIMIT));
     cpm_text.textContent = cpm;
     wpm_text.textContent = wpm;
-
     cpm_group.style.display = "block";
     wpm_group.style.display = "block";
 }
 
 
 function startGame() {
-
     resetValues();
     updateQuote();
-
     clearInterval(timer);
     timer = setInterval(updateTimer, MAX_VALUE);
 }
