@@ -85,30 +85,6 @@ function processCurrentText() {
     }
 }
 
-function updateTimer() {
-    if (timeLeft > 0) {
-        --timeLeft;
-        ++timeElapsed;
-        timer_text.textContent = timeLeft + "s";
-    } else {
-        finishGame();
-    }
-}
-
-function finishGame() {
-    clearInterval(timer);
-    input_area.disabled = true;
-    quote_text.textContent = "Click on restart to start a new game.";
-    restart_btn.style.display = "block";
-    cpm = Math.round(((characterTyped / timeElapsed) * TIME_LIMIT));
-    wpm = Math.round((((characterTyped / 5) / timeElapsed) * TIME_LIMIT));
-    cpm_text.textContent = cpm;
-    wpm_text.textContent = wpm;
-    cpm_group.style.display = "block";
-    wpm_group.style.display = "block";
-}
-
-
 function startGame() {
     resetValues();
     updateQuote();
@@ -132,4 +108,27 @@ function resetValues() {
     restart_btn.style.display = "none";
     cpm_group.style.display = "none";
     wpm_group.style.display = "none";
+}
+
+function updateTimer() {
+    if (timeLeft > 0) {
+        --timeLeft;
+        ++timeElapsed;
+        timer_text.textContent = timeLeft + "s";
+    } else {
+        finishGame();
+    }
+}
+
+function finishGame() {
+    clearInterval(timer);
+    input_area.disabled = true;
+    quote_text.textContent = "Click on restart to start a new game.";
+    restart_btn.style.display = "block";
+    cpm = Math.round(((characterTyped / timeElapsed) * TIME_LIMIT));
+    wpm = Math.round((((characterTyped / 5) / timeElapsed) * TIME_LIMIT));
+    cpm_text.textContent = cpm;
+    wpm_text.textContent = wpm;
+    cpm_group.style.display = "block";
+    wpm_group.style.display = "block";
 }
