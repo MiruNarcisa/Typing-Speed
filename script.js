@@ -13,7 +13,6 @@ let quotes_array = [
 ];
 
 let timer_text = document.querySelector(".curr_time");
-let accuracy_text = document.querySelector(".curr_accuracy");
 let error_text = document.querySelector(".curr_correct");
 let cpm_text = document.querySelector(".curr_cpm");
 let wpm_text = document.querySelector(".curr_wpm");
@@ -23,13 +22,11 @@ let restart_btn = document.querySelector(".restart_btn");
 let cpm_group = document.querySelector(".cpm");
 let wpm_group = document.querySelector(".wpm");
 let error_group = document.querySelector(".correct");
-let accuracy_group = document.querySelector(".accuracy");
 
 let timeLeft = TIME_LIMIT;
 let timeElapsed = 0;
 let total_correct = 0;
 let correct = 0;
-let accuracy = 0;
 let characterTyped = 0;
 let current_quote = "";
 let quoteNo = 0;
@@ -80,8 +77,6 @@ function processCurrentText() {
     error_text.textContent = total_correct + correct;
 
     let correctCharacters = (characterTyped - (total_correct + correct));
-    let accuracyVal = ((correctCharacters / characterTyped) * HUNDRED);
-    accuracy_text.textContent = Math.round(accuracyVal);
 
     if (curr_input.length == current_quote.length) {
         updateQuote();
@@ -126,14 +121,12 @@ function resetValues() {
     timeElapsed = 0;
     correct = 0;
     total_correct = 0;
-    accuracy = 0;
     characterTyped = 0;
     quoteNo = 0;
     input_area.disabled = false;
 
     input_area.value = "";
     quote_text.textContent = 'Click on the area below to start the game.';
-    accuracy_text.textContent = HUNDRED;
     timer_text.textContent = timeLeft + 's';
     error_text.textContent = 0;
     restart_btn.style.display = "none";
